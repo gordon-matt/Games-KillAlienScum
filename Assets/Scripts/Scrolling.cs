@@ -7,25 +7,13 @@ public class Scrolling : MonoBehaviour
     private List<Transform> backgroundPart;
     private Vector2 repeatableSize;
     private Vector3 gap = Vector3.zero;
-
-    /// <summary>
-    /// Scrolling speed
-    /// </summary>
+    
     public Vector2 Speed = new Vector2(10, 10);
-
-    /// <summary>
-    /// Moving direction
-    /// </summary>
+    
     public Vector2 Direction = Vector2.left;
-
-    /// <summary>
-    /// Movement should be applied to camera
-    /// </summary>
+    
     public bool IsLinkedToCamera = false;
-
-    /// <summary>
-    /// Background is inifnite
-    /// </summary>
+    
     public bool IsLooping = false;
 
     private void Start()

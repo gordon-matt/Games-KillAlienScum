@@ -22,7 +22,7 @@ public class Health : MonoBehaviour
             if (HitPoints <= 0)
             {
                 SpecialEffectsHelper.Instance.Explosion(transform.position);
-                SoundEffectsHelper.Instance.MakeExplosionSound();
+                SoundEffectsHelper.Instance.PlaySound(SoundType.Explosion);
                 Destroy(gameObject);
             }
         }

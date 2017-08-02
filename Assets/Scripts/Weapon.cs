@@ -39,20 +39,12 @@ public class Weapon : MonoBehaviour
                 projectile.IsEnemyProjectile = isEnemy;
             }
 
-            // Make the weapon shot always towards it
+            // Ensure the weapon always shoots towards the correct target
             var moveController = projectileTransform.gameObject.GetComponent<MoveController>();
             if (moveController != null)
             {
-                moveController.Direction = transform.right; // towards in 2D space is the right of the sprite
-            }
-
-            if (isEnemy)
-            {
-                SoundEffectsHelper.Instance.MakeEnemyShotSound();
-            }
-            else
-            {
-                SoundEffectsHelper.Instance.MakePlayerShotSound();
+                // In 2D space, transform.right is forward for the sprite.
+                moveController.Direction = transform.right;
             }
         }
     }

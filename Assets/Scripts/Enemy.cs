@@ -2,41 +2,38 @@
 
 public class Enemy : MonoBehaviour
 {
-    private bool hasSpawn;
+    private new Collider2D collider2D;
+    private new Renderer renderer;
     private MoveController moveController;
     private Weapon[] weapons;
+    private bool hasSpawned;
 
-    private void Awake()
+    public void Awake()
     {
-        // Retrieve the weapon only once
         weapons = GetComponentsInChildren<Weapon>();
-
-        // Retrieve scripts to disable when not spawn
         moveController = GetComponent<MoveController>();
+        collider2D = GetComponent<Collider2D>();
+        renderer = GetComponent<Renderer>();
     }
 
-    private void Start()
+    public void Start()
     {
-        hasSpawn = false;
+        hasSpawned = false;
 
-        // Disable everything
-        // -- collider
-        GetComponent<Collider2D>().enabled = false;
-        // -- Moving
+        collider2D.enabled = false;
         moveController.enabled = false;
-        // -- Shooting
-        foreach (Weapon weapon in weapons)
+
+        foreach (var weapon in weapons)
         {
             weapon.enabled = false;
         }
     }
 
-    private void Update()
+    public void Update()
     {
-        // Check if the enemy has spawned
-        if (hasSpawn == false)
+        if (!hasSpawned)
         {
-            if (GetComponent<Renderer>().IsVisibleFrom(Camera.main))
+            if (renderer.IsVisibleFrom(Camera.main))
             {
                 Spawn();
             }
@@ -49,12 +46,12 @@ public class Enemy : MonoBehaviour
                 if (weapon != null && weapon.enabled && weapon.CanAttack)
                 {
                     weapon.Attack(true);
-                    SoundEffectsHelper.Instance.MakeEnemyShotSound();
+                    SoundEffectsHelper.Instance.PlaySound(SoundType.EnemyProjectile);
                 }
             }
 
             // Out of camera?
-            if (GetComponent<Renderer>().IsVisibleFrom(Camera.main) == false)
+            if (!renderer.IsVisibleFrom(Camera.main))
             {
                 Destroy(gameObject);
             }
@@ -63,15 +60,12 @@ public class Enemy : MonoBehaviour
 
     private void Spawn()
     {
-        hasSpawn = true;
+        hasSpawned = true;
 
-        // Enable everything
-        // -- Collider
-        GetComponent<Collider2D>().enabled = true;
-        // -- Moving
+        collider2D.enabled = true;
         moveController.enabled = true;
-        // -- Shooting
-        foreach (Weapon weapon in weapons)
+
+        foreach (var weapon in weapons)
         {
             weapon.enabled = true;
         }

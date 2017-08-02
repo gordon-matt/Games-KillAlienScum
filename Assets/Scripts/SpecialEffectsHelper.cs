@@ -1,20 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
-/// <summary>
-/// Creating instance of particles from code with no effort
-/// </summary>
 public class SpecialEffectsHelper : MonoBehaviour
 {
-    /// <summary>
-    /// Singleton
-    /// </summary>
     public static SpecialEffectsHelper Instance;
 
     public ParticleSystem ExplosionEffect;
 
     private void Awake()
     {
-        // Register the singleton
         if (Instance != null)
         {
             Debug.LogError("Multiple instances of SpecialEffectsHelper!");
@@ -22,10 +16,6 @@ public class SpecialEffectsHelper : MonoBehaviour
         Instance = this;
     }
 
-    /// <summary>
-    /// Create an explosion at the given location
-    /// </summary>
-    /// <param name="position"></param>
     public void Explosion(Vector3 position)
     {
         if (ExplosionEffect != null)
@@ -34,18 +24,24 @@ public class SpecialEffectsHelper : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Instantiate a Particle system from prefab
-    /// </summary>
-    /// <param name="particleSystem"></param>
-    /// <returns></returns>
     private ParticleSystem InstantiateParticleSystem(ParticleSystem particleSystem, Vector3 position)
     {
-        var newParticleSystem = Instantiate(particleSystem, position, Quaternion.identity);
+        var particleSystemInstance = Instantiate(particleSystem, position, Quaternion.identity);
 
-        // Make sure it will be destroyed
-        Destroy(newParticleSystem.gameObject, newParticleSystem.startLifetime);
+        float lifetime = 0f;
 
-        return newParticleSystem;
+        var minMaxCurve = particleSystemInstance.main.startLifetime;
+        switch (minMaxCurve.mode)
+        {
+            case ParticleSystemCurveMode.Constant: lifetime = minMaxCurve.constant; break;
+            case ParticleSystemCurveMode.Curve: lifetime = minMaxCurve.curve.keys.Select(x => x.time).Sum(); break;
+            case ParticleSystemCurveMode.TwoConstants: lifetime = minMaxCurve.constantMax; break;
+            case ParticleSystemCurveMode.TwoCurves: lifetime = minMaxCurve.curveMax.keys.Select(x => x.time).Sum(); break;
+        }
+        
+        // Ensure particle is destroyed
+        Destroy(particleSystemInstance.gameObject, lifetime);
+
+        return particleSystemInstance;
     }
 }

@@ -29,14 +29,15 @@ public class PlayerController : MonoBehaviour
             if (weapon != null)
             {
                 weapon.Attack(false);
+                SoundEffectsHelper.Instance.PlaySound(SoundType.PlayerProjectile);
             }
         }
-
+        
         float distance = (transform.position - Camera.main.transform.position).z;
-        var leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).x;
-        var rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance)).x;
-        var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).y;
-        var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, distance)).y;
+        float leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).x;
+        float rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance)).x;
+        float topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance)).y;
+        float bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, distance)).y;
 
         transform.position = new Vector3(
             Mathf.Clamp(transform.position.x, leftBorder, rightBorder),

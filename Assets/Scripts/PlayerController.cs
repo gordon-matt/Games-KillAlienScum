@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
         {
             // Game Over.
             var gameOver = FindObjectOfType<GameOver>();
-            gameOver.ShowButtons();
+            gameOver.ShowCanvas();
         }
     }
 

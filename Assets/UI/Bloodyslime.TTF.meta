@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 62e75e5e705275f4c9dda65aa44697b5
+timeCreated: 1501744920
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Bloodyslime
+  fontNames:
+  - Bloodyslime
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

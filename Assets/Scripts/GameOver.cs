@@ -8,30 +8,32 @@ using UnityEngine.UI;
 public class GameOver : MonoBehaviour
 {
     private Button[] buttons;
+    private GameObject title;
 
     private void Awake()
     {
-        // Get the buttons
         buttons = GetComponentsInChildren<Button>();
-
-        // Disable them
-        HideButtons();
+        title = GameObject.Find("Title");
+        
+        HideCanvas();
     }
 
-    public void HideButtons()
+    public void HideCanvas()
     {
         foreach (var b in buttons)
         {
             b.gameObject.SetActive(false);
         }
+        title.SetActive(false);
     }
 
-    public void ShowButtons()
+    public void ShowCanvas()
     {
         foreach (var b in buttons)
         {
             b.gameObject.SetActive(true);
         }
+        title.SetActive(true);
     }
 
     public void ExitToMenu()

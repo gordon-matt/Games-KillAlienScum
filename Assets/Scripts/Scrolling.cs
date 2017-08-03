@@ -173,7 +173,7 @@ public class Scrolling : MonoBehaviour
                     // -- And we physically moves him to the further position possible
                     //---------------------------------------------------------------------------------
 
-                    if (firstChild.GetComponent<Renderer>().IsVisibleFrom(Camera.main) == false)
+                    if (!firstChild.GetComponent<Renderer>().IsVisibleFrom(Camera.main))
                     {
                         // Set position in the end
                         firstChild.position = gap + new Vector3(

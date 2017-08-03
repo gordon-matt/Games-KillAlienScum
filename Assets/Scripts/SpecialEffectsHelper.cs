@@ -11,7 +11,7 @@ public class SpecialEffectsHelper : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.LogError("Multiple instances of SpecialEffectsHelper!");
+            Debug.LogError("Multiple instances of SoundEffectsHelper!");
         }
         Instance = this;
     }

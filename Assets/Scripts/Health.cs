@@ -6,19 +6,32 @@ public class Health : MonoBehaviour
 
     public bool IsEnemy = true;
 
+    public int HitPointsLeft { get; private set; }
+
+    public void Awake()
+    {
+        HitPointsLeft = HitPoints;
+    }
+
     public void Damage(int damageCount)
     {
-        HitPoints -= damageCount;
+        HitPointsLeft -= damageCount;
 
-        if (HitPoints <= 0)
+        if (HitPointsLeft <= 0)
         {
-            // Explosion!
-            SpecialEffectsHelper.Instance.Explosion(transform.position);
-            SoundEffectsHelper.Instance.PlaySound(SoundType.Explosion);
-
-            // Dead!
-            Destroy(gameObject);
+            DoKill();
         }
+    }
+
+    public void Kill()
+    {
+        HitPointsLeft = 0;
+        DoKill();
+    }
+
+    public void ResetHitPoints()
+    {
+        HitPointsLeft = HitPoints;
     }
 
     public void OnTriggerEnter2D(Collider2D otherCollider)
@@ -36,5 +49,15 @@ public class Health : MonoBehaviour
             // Destroy the shot
             Destroy(shot.gameObject); // Remember to always target the game object, otherwise you will just remove the script
         }
+    }
+
+    private void DoKill()
+    {
+        // Explosion!
+        SpecialEffectsHelper.Instance.Explosion(transform.position);
+        SoundEffectsHelper.Instance.PlaySound(SoundType.Explosion);
+
+        // Dead!
+        Destroy(gameObject);
     }
 }

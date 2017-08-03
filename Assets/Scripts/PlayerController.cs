@@ -12,7 +12,14 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rigidBody;
 
-    private void Update()
+    private Health playerHealth;
+
+    public void Awake()
+    {
+        playerHealth = GetComponent<Health>();
+    }
+
+    public void Update()
     {
         // 2 - Retrieve axis information
         float inputX = Input.GetAxis("Horizontal");
@@ -49,7 +56,7 @@ public class PlayerController : MonoBehaviour
             transform.position.z);
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         // 4 - Move the game object
         if (rigidBody == null)
@@ -59,11 +66,10 @@ public class PlayerController : MonoBehaviour
         rigidBody.velocity = movement;
     }
 
-    private void OnDestroy()
+    public void OnDestroy()
     {
         // Check that the player is dead, as we is also callled when closing Unity
-        var playerHealth = GetComponent<Health>();
-        if (playerHealth != null && playerHealth.HitPoints <= 0)
+        if (playerHealth != null && playerHealth.HitPointsLeft <= 0)
         {
             // Game Over.
             var gameOver = FindObjectOfType<GameOver>();
@@ -71,7 +77,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         bool damagePlayer = false;
 
@@ -83,7 +89,7 @@ public class PlayerController : MonoBehaviour
             var enemyHealth = enemy.GetComponent<Health>();
             if (enemyHealth != null)
             {
-                enemyHealth.Damage(enemyHealth.HitPoints);
+                enemyHealth.Damage(enemyHealth.HitPointsLeft);
             }
 
             damagePlayer = true;
@@ -106,11 +112,24 @@ public class PlayerController : MonoBehaviour
         // Damage the player
         if (damagePlayer)
         {
-            var playerHealth = GetComponent<Health>();
             if (playerHealth != null)
             {
                 playerHealth.Damage(1);
             }
         }
+    }
+
+    public void FinishLevel()
+    {
+        enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+    }
+
+    public void RespawnAt(Transform spawnPoint)
+    {
+        GetComponent<Collider2D>().enabled = true;
+        playerHealth.ResetHitPoints();
+        transform.position = spawnPoint.position;
+        //Camera.main.transform.position = spawnPoint.position;
     }
 }

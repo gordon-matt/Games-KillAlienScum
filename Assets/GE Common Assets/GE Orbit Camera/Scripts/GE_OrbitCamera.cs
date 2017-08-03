@@ -267,7 +267,7 @@ public class GE_OrbitCamera : MonoBehaviour
 
 			float deadZone = 0.01f;
 			// Zoom by mouse
-			if (ZoomedbyTouch == false)
+			if (!ZoomedbyTouch)
 			{
 				if (Input.GetAxis("Mouse ScrollWheel") < -deadZone || Input.GetAxis("Mouse ScrollWheel") > deadZone)
 				{

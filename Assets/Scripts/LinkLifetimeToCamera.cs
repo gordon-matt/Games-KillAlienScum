@@ -8,6 +8,11 @@ public class LinkLifetimeToCamera : MonoBehaviour
     public void Awake()
     {
         renderer = GetComponent<Renderer>();
+
+        if (renderer == null)
+        {
+            renderer = GetComponentInChildren<Renderer>();
+        }
     }
 
     public void Start()

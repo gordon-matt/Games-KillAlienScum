@@ -1,0 +1,17 @@
+TODO:
+
+- generic script for deleteing objects when they leave the camera bounds (DONE)
+
+- asteroids (DONE)
+
+- show HUD (health / points)
+
+- checkpoints
+
+- boss at end of levels (or every few levels?)
+
+- when die, reset position to center screen, else player flies off somewhere
+
+- end credits?
+
+- performance improvement for some particles.. example: "one shot" option? meaning static - one time generate.. useful for nebulae

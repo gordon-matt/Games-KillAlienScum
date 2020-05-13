@@ -6,11 +6,20 @@ public class Health : MonoBehaviour
 
     public bool IsEnemy = true;
 
+    public bool IsProjectile = false;
+
     public int HitPointsLeft { get; private set; }
+
+    private LevelMaker levelMaker;
 
     public void Awake()
     {
         HitPointsLeft = HitPoints;
+    }
+
+    public void Start()
+    {
+        levelMaker = GameObject.FindWithTag("Level Maker").GetComponent<LevelMaker>();
     }
 
     public void Damage(int damageCount)
@@ -21,6 +30,33 @@ public class Health : MonoBehaviour
         {
             DoKill();
         }
+        else if (!IsEnemy && !IsProjectile)
+        {
+            float healthPercent = ((float)HitPointsLeft / HitPoints) * 100;
+
+            if (healthPercent <= 25)
+            {
+                SoundEffectsHelper.Instance.PlaySound(SoundType.HolyShit);
+            }
+            else if (healthPercent <= 50)
+            {
+                SoundEffectsHelper.Instance.PlaySound(SoundType.OhShit3);
+            }
+            else if (healthPercent <= 75)
+            {
+                SoundEffectsHelper.Instance.PlaySound(SoundType.OhShit2);
+            }
+            else
+            {
+                SoundEffectsHelper.Instance.PlaySound(SoundType.OhShit1);
+            }
+        }
+    }
+
+    public void RecoverHealth(int hp)
+    {
+        // Ensure we don't go past the max hitpoints
+        HitPointsLeft = System.Math.Min(HitPointsLeft + hp, HitPoints);
     }
 
     public void Kill()
@@ -41,6 +77,7 @@ public class Health : MonoBehaviour
         {
             return;
         }
+
         // Avoid friendly fire
         if (shot.IsEnemyProjectile != IsEnemy)
         {
@@ -56,6 +93,28 @@ public class Health : MonoBehaviour
         // Explosion!
         SpecialEffectsHelper.Instance.Explosion(transform.position);
         SoundEffectsHelper.Instance.PlaySound(SoundType.Explosion);
+
+        if (IsEnemy)
+        {
+            GameManager.Instance.AddPoints(1);
+
+            // 1-in-15 chance to drop health pack.
+            if (Random.Range(1, 15) == 1)
+            {
+                if (levelMaker.HealthPack != null)
+                {
+                    Instantiate(levelMaker.HealthPack, gameObject.transform.position, Quaternion.identity);
+                }
+            }
+            // 1-in-20 chance to drop health pack.
+            else if (Random.Range(1, 20) == 1)
+            {
+                if (levelMaker.ZapAttack != null)
+                {
+                    Instantiate(levelMaker.ZapAttack, gameObject.transform.position, Quaternion.identity);
+                }
+            }
+        }
 
         // Dead!
         Destroy(gameObject);

@@ -2,26 +2,19 @@
 
 public class Enemy : MonoBehaviour
 {
-    private new Collider2D collider2D;
     private new Renderer renderer;
-    private MoveController moveController;
     private Weapon[] weapons;
     private bool hasSpawned;
 
     public void Awake()
     {
         weapons = GetComponentsInChildren<Weapon>();
-        moveController = GetComponent<MoveController>();
-        collider2D = GetComponent<Collider2D>();
         renderer = GetComponent<Renderer>();
     }
 
     public void Start()
     {
         hasSpawned = false;
-
-        collider2D.enabled = false;
-        moveController.enabled = false;
 
         foreach (var weapon in weapons)
         {
@@ -61,9 +54,6 @@ public class Enemy : MonoBehaviour
     private void Spawn()
     {
         hasSpawned = true;
-
-        collider2D.enabled = true;
-        moveController.enabled = true;
 
         foreach (var weapon in weapons)
         {

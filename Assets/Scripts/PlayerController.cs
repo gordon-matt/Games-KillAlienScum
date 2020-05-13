@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿// Gained this script from doing this tutorial: https://pixelnest.io/tutorials/2d-game-unity/
+
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -71,9 +74,7 @@ public class PlayerController : MonoBehaviour
         // Check that the player is dead, as we is also callled when closing Unity
         if (playerHealth != null && playerHealth.HitPointsLeft <= 0)
         {
-            // Game Over.
-            var gameOver = FindObjectOfType<GameOver>();
-            gameOver.ShowCanvas();
+            SceneManager.LoadScene("GameOver");
         }
     }
 
@@ -90,20 +91,6 @@ public class PlayerController : MonoBehaviour
             if (enemyHealth != null)
             {
                 enemyHealth.Damage(enemyHealth.HitPointsLeft);
-            }
-
-            damagePlayer = true;
-        }
-
-        // Collision with the boss
-        var boss = collision.gameObject.GetComponent<Boss>();
-        if (boss != null)
-        {
-            // Boss lose some hp too
-            var bossHealth = boss.GetComponent<Health>();
-            if (bossHealth != null)
-            {
-                bossHealth.Damage(5);
             }
 
             damagePlayer = true;

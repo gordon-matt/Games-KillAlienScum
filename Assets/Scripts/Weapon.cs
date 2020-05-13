@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿// Gained this script from doing this tutorial: https://pixelnest.io/tutorials/2d-game-unity/
+
+using UnityEngine;
 
 /// <summary>
 /// Launch projectile

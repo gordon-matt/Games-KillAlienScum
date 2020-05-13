@@ -7,6 +7,8 @@ public class SpecialEffectsHelper : MonoBehaviour
 
     public ParticleSystem ExplosionEffect;
 
+    public ParticleSystem ZapAttackEffect;
+
     private void Awake()
     {
         if (Instance != null)
@@ -24,6 +26,14 @@ public class SpecialEffectsHelper : MonoBehaviour
         }
     }
 
+    public void ZapAttack(Vector3 position)
+    {
+        if (ZapAttackEffect != null)
+        {
+            InstantiateParticleSystem(ZapAttackEffect, position);
+        }
+    }
+
     private ParticleSystem InstantiateParticleSystem(ParticleSystem particleSystem, Vector3 position)
     {
         var particleSystemInstance = Instantiate(particleSystem, position, Quaternion.identity);
@@ -38,7 +48,7 @@ public class SpecialEffectsHelper : MonoBehaviour
             case ParticleSystemCurveMode.TwoConstants: lifetime = minMaxCurve.constantMax; break;
             case ParticleSystemCurveMode.TwoCurves: lifetime = minMaxCurve.curveMax.keys.Select(x => x.time).Sum(); break;
         }
-        
+
         // Ensure particle is destroyed
         Destroy(particleSystemInstance.gameObject, lifetime);
 

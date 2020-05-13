@@ -12,6 +12,8 @@
     {
     }
 
+    public string PlayerName { get; set; } = "Player 1";
+
     public int Points { get; private set; }
 
     public void AddPoints(int pointsToAdd)

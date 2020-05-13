@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿// Gained this script from doing this tutorial: https://pixelnest.io/tutorials/2d-game-unity/ and made some changes.
+
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,14 +9,16 @@ public class Scrolling : MonoBehaviour
     private List<Transform> backgroundPart;
     private Vector2 repeatableSize;
     private Vector3 gap = Vector3.zero;
-    
+
     public Vector2 Speed = new Vector2(10, 10);
-    
+
     public Vector2 Direction = Vector2.left;
-    
+
     public bool IsLinkedToCamera = false;
-    
+
     public bool IsLooping = false;
+
+    public int GapOffsetX = 0;  // Fix for particle systems (Nebulae in this case)
 
     private void Start()
     {
@@ -76,6 +80,8 @@ public class Scrolling : MonoBehaviour
             repeatableSize = new Vector2(
               Mathf.Abs(last.position.x - first.position.x),
               Mathf.Abs(last.position.y - first.position.y));
+
+            gap.x += GapOffsetX; // Fix for particle systems
         }
     }
 

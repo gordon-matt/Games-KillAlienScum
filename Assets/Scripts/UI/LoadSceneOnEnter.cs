@@ -7,9 +7,11 @@ public class LoadSceneOnEnter : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log("Update...");
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            SceneManager.LoadScene(SceneToLoad);
+            //Debug.Log("Trying to load scene...");
+            FindObjectOfType<ProgressSceneLoader>().LoadScene(SceneToLoad);
         }
     }
 }

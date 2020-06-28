@@ -14,6 +14,6 @@ public class Menu : MonoBehaviour
             GameManager.Instance.PlayerName = playerName;
         }
 
-        SceneManager.LoadScene("GetReady");
+        SceneManager.LoadScene("3 - GetReady");
     }
 }

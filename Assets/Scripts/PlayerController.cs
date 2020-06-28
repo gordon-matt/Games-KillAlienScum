@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         // Check that the player is dead, as we is also callled when closing Unity
         if (playerHealth != null && playerHealth.HitPointsLeft <= 0)
         {
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("5 - GameOver");
         }
     }
 

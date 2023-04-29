@@ -8,3 +8,5 @@ It was my final project for the course. I had intended to polish it off some mor
 Here's the video I submitted for this final project, which explains some of the design and demonstrates the game in action:
 
 [<img src="https://i3.ytimg.com/vi/2PY4WCbM68s/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=2PY4WCbM68s "Kill Alien Scum!")
+
+Unity Editor version: 2019.3.12f1

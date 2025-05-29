@@ -16,7 +16,7 @@ public class ZapAttack : MonoBehaviour
         {
             gameObject.transform.localScale = Vector3.zero; // make invisible. We could use gameObject.SetActive(false), but that would not play the sound then.
             
-            var enemies = FindObjectsOfType<Enemy>();
+            var enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.InstanceID);
             int enemyCount = enemies.Count();
 
             foreach (var enemy in enemies)

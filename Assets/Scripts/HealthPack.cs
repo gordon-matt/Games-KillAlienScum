@@ -6,7 +6,7 @@ public class HealthPack : MonoBehaviour
 
     private void Start()
     {
-        var player = FindObjectOfType<PlayerController>();
+        var player = FindFirstObjectByType<PlayerController>();
         playerHealth = player.GetComponent<Health>();
     }
 

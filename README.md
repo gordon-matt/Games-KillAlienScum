@@ -9,4 +9,4 @@ Here's the video I submitted for this final project, which explains some of the 
 
 [<img src="https://i3.ytimg.com/vi/2PY4WCbM68s/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=2PY4WCbM68s "Kill Alien Scum!")
 
-Unity Editor version: 2021.3.45f1
+Unity Editor version: 2022.3.62f1

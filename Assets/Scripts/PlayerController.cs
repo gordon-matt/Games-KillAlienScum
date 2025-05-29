@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         {
             rigidBody = GetComponent<Rigidbody2D>();
         }
-        rigidBody.velocity = movement;
+        rigidBody.linearVelocity = movement;
     }
 
     public void OnDestroy()

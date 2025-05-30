@@ -49,16 +49,16 @@ public class HighScores : MonoBehaviour
         {
             var highScores = new List<HighScore>
             {
-                new HighScore { Name = "AAA", Score = 1200 },
-                new HighScore { Name = "AAA", Score = 1000 },
-                new HighScore { Name = "AAA", Score = 900 },
-                new HighScore { Name = "AAA", Score = 700 },
-                new HighScore { Name = "AAA", Score = 600 },
-                new HighScore { Name = "AAA", Score = 500 },
-                new HighScore { Name = "AAA", Score = 400 },
-                new HighScore { Name = "AAA", Score = 350 },
-                new HighScore { Name = "AAA", Score = 200 },
-                new HighScore { Name = "AAA", Score = 90 }
+                new() { Name = "AAA", Score = 1200 },
+                new() { Name = "AAA", Score = 1000 },
+                new() { Name = "AAA", Score = 900 },
+                new() { Name = "AAA", Score = 700 },
+                new() { Name = "AAA", Score = 600 },
+                new() { Name = "AAA", Score = 500 },
+                new() { Name = "AAA", Score = 400 },
+                new() { Name = "AAA", Score = 350 },
+                new() { Name = "AAA", Score = 200 },
+                new() { Name = "AAA", Score = 90 }
             };
 
             SaveFile(highScores);
@@ -110,11 +110,9 @@ public class HighScores : MonoBehaviour
     private void SaveFile(ICollection<HighScore> highScores)
     {
         string csv = highScores.ToCsv(outputColumnNames: false);
-        using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
-        using (var streamWriter = new StreamWriter(fileStream))
-        {
-            streamWriter.Write(csv);
-        }
+        using var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+        using var streamWriter = new StreamWriter(fileStream);
+        streamWriter.Write(csv);
     }
 
     public class HighScore

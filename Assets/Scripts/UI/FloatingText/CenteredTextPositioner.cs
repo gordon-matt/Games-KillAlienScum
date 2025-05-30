@@ -23,8 +23,8 @@ public class CenteredTextPositioner : IFloatingTextPositioner
         }
 
         position = new Vector2(
-            Screen.width / 2f - size.x / 2f,
-            Mathf.Lerp(Screen.height / 2f + size.y, 0, textPosition));
+            (Screen.width / 2f) - (size.x / 2f),
+            Mathf.Lerp((Screen.height / 2f) + size.y, 0, textPosition));
 
         return true;
     }

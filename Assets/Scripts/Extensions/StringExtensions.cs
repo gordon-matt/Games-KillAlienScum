@@ -13,34 +13,22 @@ namespace Assets.Scripts
         /// </summary>
         /// <param name="source">The string to be enquoted.</param>
         /// <returns>A new System.String consisting of the original enquoted in double quotes.</returns>
-        public static string EnquoteDouble(this string source)
-        {
-            return $"\"{source}\"";
-        }
+        public static string EnquoteDouble(this string source) => $"\"{source}\"";
 
         /// <summary>
         /// Encloses the given System.String in single quotes.
         /// </summary>
         /// <param name="source">The string to be enquoted.</param>
         /// <returns>A new System.String consisting of the original enquoted in single quotes.</returns>
-        public static string EnquoteSingle(this string source)
-        {
-            return $"'{source}'";
-        }
+        public static string EnquoteSingle(this string source) => $"'{source}'";
 
         /// <summary>
         /// Splits the given string by newline characters and returns the result as a collection of strings.
         /// </summary>
         /// <param name="source">The string to split into lines.</param>
         /// <returns>A collection of strings.</returns>
-        public static IEnumerable<string> ToLines(this string source)
-        {
-            if (!string.IsNullOrEmpty(source))
-            {
-                return source.Split(new[] { "\r\n", Environment.NewLine, "\n" }, StringSplitOptions.None);
-            }
-
-            return new string[0];
-        }
+        public static IEnumerable<string> ToLines(this string source) => !string.IsNullOrEmpty(source)
+            ? source.Split(new[] { "\r\n", Environment.NewLine, "\n" }, StringSplitOptions.None)
+            : (new string[0]);
     }
 }

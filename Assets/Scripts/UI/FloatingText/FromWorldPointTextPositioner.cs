@@ -7,7 +7,7 @@ public class FromWorldPointTextPositioner : IFloatingTextPositioner
     private readonly Camera camera;
     private readonly float speed;
     private readonly Vector3 worldPosition;
-    private float timeToLive;
+    private readonly float timeToLive;
     private float yOffset;
 
     public FromWorldPointTextPositioner(Camera camera, Vector3 worldPosition, float timeToLive, float speed)

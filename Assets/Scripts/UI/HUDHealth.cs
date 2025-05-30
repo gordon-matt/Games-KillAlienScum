@@ -15,7 +15,7 @@ public class HUDHealth : MonoBehaviour
 
     private void Update()
     {
-        float health = ((float)playerHealth.HitPointsLeft / playerHealth.HitPoints) * 100;
+        float health = (float)playerHealth.HitPointsLeft / playerHealth.HitPoints * 100;
         healthbar.SetHealth(health);
     }
 }

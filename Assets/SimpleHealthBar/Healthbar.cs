@@ -41,10 +41,10 @@ public class Healthbar : MonoBehaviour
 
     [Space]
     [Header("Healthbar Colors:")]
-    public Color highHealthColor = new Color(0.35f, 1f, 0.35f);
+    public Color highHealthColor = new(0.35f, 1f, 0.35f);
 
-    public Color mediumHealthColor = new Color(0.9450285f, 1f, 0.4481132f);
-    public Color lowHealthColor = new Color(1f, 0.259434f, 0.259434f);
+    public Color mediumHealthColor = new(0.9450285f, 1f, 0.4481132f);
+    public Color lowHealthColor = new(1f, 0.259434f, 0.259434f);
 
     private void Start()
     {
@@ -65,7 +65,7 @@ public class Healthbar : MonoBehaviour
     // Every frame:
     private void Update()
     {
-        healthPercentage = int.Parse((Mathf.Round((health / maximumHealth) * 100)).ToString()); // Fix
+        healthPercentage = int.Parse(Mathf.Round(health / maximumHealth * 100).ToString()); // Fix
         //healthPercentage = int.Parse((Mathf.Round(maximumHealth * (health / 100f))).ToString());
 
         // If the player's health is below the minimum health, then set it to the minimum health:

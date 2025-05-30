@@ -2,7 +2,7 @@
 
 public class MoveController : MonoBehaviour
 {
-    public Vector2 Speed = new Vector2(7, 7);
+    public Vector2 Speed = new(7, 7);
     public Vector2 Direction = Vector2.left;
 
     public void Update()

@@ -37,8 +37,8 @@ public class LevelMaker : MonoBehaviour
 
     public GameObject ZapAttack;
 
-    private List<int> planetsSeenIndexes = new List<int>();
-    private string[] asteroidColors = new[] { "Brown", "Gray", "Red" };
+    private readonly List<int> planetsSeenIndexes = new();
+    private readonly string[] asteroidColors = new[] { "Brown", "Gray", "Red" };
 
     private void Start()
     {
@@ -61,7 +61,7 @@ public class LevelMaker : MonoBehaviour
         }
 
         // The LevelMaker is as good a place as any for this...
-        if (Input.GetKey((KeyCode.Escape)))
+        if (Input.GetKey(KeyCode.Escape))
         {
             Application.Quit();
         }
@@ -115,7 +115,7 @@ public class LevelMaker : MonoBehaviour
                         var otherStars = Stars.Where(x => !x.name.Contains("Large"));
 
                         // Decide whether the large star should be in front for parallax or behind.
-                        var largeStarInFront = Random.Range(1, 3) == 1;
+                        bool largeStarInFront = Random.Range(1, 3) == 1;
 
                         SpawnStar(
                             rightBorder,
@@ -264,7 +264,7 @@ public class LevelMaker : MonoBehaviour
             var enemy = Enemies[Random.Range(0, Enemies.Length)];
 
             // Random size for enemy
-            var enemySize = Random.Range(0.1f, 0.2f);
+            float enemySize = Random.Range(0.1f, 0.2f);
             enemy.transform.localScale = new Vector3(enemySize, enemySize);
 
             Instantiate(
@@ -287,14 +287,7 @@ public class LevelMaker : MonoBehaviour
         float xMax;
 
         bool denseField = Random.Range(1, 2) == 1; // sparse vs dense asteroid field..
-        if (denseField)
-        {
-            xMax = xMin + 30;
-        }
-        else
-        {
-            xMax = xMin + 70;
-        }
+        xMax = denseField ? xMin + 30 : xMin + 70;
 
         // It looks a little bit weird having all the different colored asteroids.
         //  Much better to choose a single color and make 90% of them that color and then other 10% as the other 2 colors.
@@ -365,31 +358,25 @@ public class LevelMaker : MonoBehaviour
         Foreground
     }
 
-    private static string GetSortingLayerName(Layer layer)
+    private static string GetSortingLayerName(Layer layer) => layer switch
     {
-        switch (layer)
-        {
-            case Layer.Background: return "Background";
-            case Layer.BackgroundElements: return "Background Particles";
-            case Layer.Middleground1: return "Middleground 1";
-            case Layer.Middleground2: return "Middleground 2";
-            case Layer.Middleground3: return "Middleground 3";
-            case Layer.Foreground: return "Foreground";
-            default: return "Middleground 2";
-        }
-    }
+        Layer.Background => "Background",
+        Layer.BackgroundElements => "Background Particles",
+        Layer.Middleground1 => "Middleground 1",
+        Layer.Middleground2 => "Middleground 2",
+        Layer.Middleground3 => "Middleground 3",
+        Layer.Foreground => "Foreground",
+        _ => "Middleground 2",
+    };
 
-    private Transform GetLayerTransform(Layer layer)
+    private Transform GetLayerTransform(Layer layer) => layer switch
     {
-        switch (layer)
-        {
-            case Layer.Background: return Layer_Background.transform;
-            case Layer.BackgroundElements: return Layer_BackgroundElements.transform;
-            case Layer.Middleground1: return Layer_Middleground1.transform;
-            case Layer.Middleground2: return Layer_Middleground2.transform;
-            case Layer.Middleground3: return Layer_Middleground3.transform;
-            case Layer.Foreground: return Layer_Foreground.transform;
-            default: return Layer_Middleground2.transform;
-        }
-    }
+        Layer.Background => Layer_Background.transform,
+        Layer.BackgroundElements => Layer_BackgroundElements.transform,
+        Layer.Middleground1 => Layer_Middleground1.transform,
+        Layer.Middleground2 => Layer_Middleground2.transform,
+        Layer.Middleground3 => Layer_Middleground3.transform,
+        Layer.Foreground => Layer_Foreground.transform,
+        _ => Layer_Middleground2.transform,
+    };
 }

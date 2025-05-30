@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 0 - The speed of the ship
     /// </summary>
-    public Vector2 Speed = new Vector2(25, 25);
+    public Vector2 Speed = new(25, 25);
 
     // 1 - Store the movement
     private Vector2 movement;
@@ -17,10 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private Health playerHealth;
 
-    public void Awake()
-    {
-        playerHealth = GetComponent<Health>();
-    }
+    public void Awake() => playerHealth = GetComponent<Health>();
 
     public void Update()
     {

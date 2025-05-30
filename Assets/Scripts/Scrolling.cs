@@ -10,7 +10,7 @@ public class Scrolling : MonoBehaviour
     private Vector2 repeatableSize;
     private Vector3 gap = Vector3.zero;
 
-    public Vector2 Speed = new Vector2(10, 10);
+    public Vector2 Speed = new(10, 10);
 
     public Vector2 Direction = Vector2.left;
 

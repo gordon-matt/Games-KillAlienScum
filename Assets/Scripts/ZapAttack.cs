@@ -5,17 +5,14 @@ public class ZapAttack : MonoBehaviour
 {
     private LevelMaker levelMaker;
 
-    public void Start()
-    {
-        levelMaker = GameObject.FindWithTag("Level Maker").GetComponent<LevelMaker>();
-    }
+    public void Start() => levelMaker = GameObject.FindWithTag("Level Maker").GetComponent<LevelMaker>();
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<PlayerController>() != null)
         {
             gameObject.transform.localScale = Vector3.zero; // make invisible. We could use gameObject.SetActive(false), but that would not play the sound then.
-            
+
             var enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.InstanceID);
             int enemyCount = enemies.Count();
 

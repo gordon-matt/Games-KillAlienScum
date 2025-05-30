@@ -12,10 +12,7 @@ public class Weapon : MonoBehaviour
     public Transform ProjectilePrefab;
     public float FireRate = 0.25f;
 
-    public void Start()
-    {
-        cooldownTime = 0f;
-    }
+    public void Start() => cooldownTime = 0f;
 
     public void Update()
     {
@@ -51,8 +48,5 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public bool CanAttack
-    {
-        get { return cooldownTime <= 0f; }
-    }
+    public bool CanAttack => cooldownTime <= 0f;
 }

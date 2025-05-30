@@ -15,10 +15,7 @@ public class LinkLifetimeToCamera : MonoBehaviour
         }
     }
 
-    public void Start()
-    {
-        hasAppeared = false;
-    }
+    public void Start() => hasAppeared = false;
 
     public void Update()
     {

@@ -8,8 +8,5 @@ public class Projectile : MonoBehaviour
 
     public bool IsEnemyProjectile = false;
 
-    public void Start()
-    {
-        Destroy(gameObject, SecondsToLive);
-    }
+    public void Start() => Destroy(gameObject, SecondsToLive);
 }

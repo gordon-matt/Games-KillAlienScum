@@ -10,8 +10,7 @@ public class FloatingText : MonoBehaviour
 
     public string Text
     {
-        get { return content.text; }
-        set { content.text = value; }
+        get => content.text; set => content.text = value;
     }
 
     public GUIStyle Style { get; set; }

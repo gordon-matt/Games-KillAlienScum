@@ -6,7 +6,7 @@ public class ProgressBar : MonoBehaviour
 {
     public Slider Slider;
 
-    public Color Color = new Color(0.35f, 1f, 0.35f);
+    public Color Color = new(0.35f, 1f, 0.35f);
 
     private void Start()
     {
@@ -23,8 +23,5 @@ public class ProgressBar : MonoBehaviour
         SetProgress(0f);
     }
 
-    public void SetProgress(float amount)
-    {
-        Slider.value = amount;
-    }
+    public void SetProgress(float amount) => Slider.value = amount;
 }

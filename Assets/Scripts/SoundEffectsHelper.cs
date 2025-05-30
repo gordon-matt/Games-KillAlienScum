@@ -40,11 +40,9 @@ public class SoundEffectsHelper : MonoBehaviour
         }
     }
 
-    private void PlaySound(AudioClip originalClip)
-    {
+    private void PlaySound(AudioClip originalClip) =>
         // We use the camera's position to ensure 2D audio
         AudioSource.PlayClipAtPoint(originalClip, Camera.main.transform.position);
-    }
 }
 
 public enum SoundType : byte

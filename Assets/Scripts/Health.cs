@@ -12,15 +12,9 @@ public class Health : MonoBehaviour
 
     private LevelMaker levelMaker;
 
-    public void Awake()
-    {
-        HitPointsLeft = HitPoints;
-    }
+    public void Awake() => HitPointsLeft = HitPoints;
 
-    public void Start()
-    {
-        levelMaker = GameObject.FindWithTag("Level Maker").GetComponent<LevelMaker>();
-    }
+    public void Start() => levelMaker = GameObject.FindWithTag("Level Maker").GetComponent<LevelMaker>();
 
     public void Damage(int damageCount)
     {
@@ -32,7 +26,7 @@ public class Health : MonoBehaviour
         }
         else if (!IsEnemy && !IsProjectile)
         {
-            float healthPercent = ((float)HitPointsLeft / HitPoints) * 100;
+            float healthPercent = (float)HitPointsLeft / HitPoints * 100;
 
             if (healthPercent <= 25)
             {
@@ -53,11 +47,9 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void RecoverHealth(int hp)
-    {
+    public void RecoverHealth(int hp) =>
         // Ensure we don't go past the max hitpoints
         HitPointsLeft = System.Math.Min(HitPointsLeft + hp, HitPoints);
-    }
 
     public void Kill()
     {
@@ -65,10 +57,7 @@ public class Health : MonoBehaviour
         DoKill();
     }
 
-    public void ResetHitPoints()
-    {
-        HitPointsLeft = HitPoints;
-    }
+    public void ResetHitPoints() => HitPointsLeft = HitPoints;
 
     public void OnTriggerEnter2D(Collider2D otherCollider)
     {

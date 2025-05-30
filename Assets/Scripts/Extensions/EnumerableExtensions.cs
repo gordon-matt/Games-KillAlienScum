@@ -17,10 +17,7 @@ namespace Assets.Scripts
         /// <param name="source">The System.Collections.Generic.IEnumerable`1 to create a CSV formatted string from.</param>
         /// <param name="outputColumnNames">Specifies whether to output column names or not.</param>
         /// <returns>A string containing the elements of source in CSV format.</returns>
-        public static string ToCsv<T>(this IEnumerable<T> source, bool outputColumnNames = true)
-        {
-            return ToDelimited(source, ",", outputColumnNames);
-        }
+        public static string ToCsv<T>(this IEnumerable<T> source, bool outputColumnNames = true) => ToDelimited(source, ",", outputColumnNames);
 
         /// <summary>
         /// Returns a delimited string containing the elements of source.
